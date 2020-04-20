@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 3c982f3d91b96cc4a80499f5f52a4cc7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Delius Unicase
+  fontNames:
+  - Delius Unicase
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5714b7bd8b096224baa64b09dd95e2aa, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
