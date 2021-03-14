@@ -12,6 +12,9 @@ public class MaskManager : MonoBehaviour
     public delegate void DestroyingMaskEventHandler(GameObject source, EventArgs args);
     public event DestroyingMaskEventHandler DestroyingMask;
 
+    public delegate void VirusCollidedWithMaskEventHandler();
+    public event VirusCollidedWithMaskEventHandler VirusCollidedWithMask;
+
     private GameObject playerObj;
     private SpawnManager spawnManager;
     private float durability;
@@ -57,6 +60,7 @@ public class MaskManager : MonoBehaviour
     {
         if (other.gameObject.name == "Virus(Clone)")
         {
+            OnVirusCollidedWithMask();
             spawnManager.RemoveItemFromActiveItemsList(other.gameObject);
             Destroy(other.gameObject);
             Durability--;
@@ -81,6 +85,14 @@ public class MaskManager : MonoBehaviour
         if(DestroyingMask != null)
         {
             DestroyingMask(gameObject, EventArgs.Empty);
+        }
+    }
+
+    public virtual void OnVirusCollidedWithMask()
+    {
+        if (VirusCollidedWithMask != null)
+        {
+            VirusCollidedWithMask();
         }
     }
 

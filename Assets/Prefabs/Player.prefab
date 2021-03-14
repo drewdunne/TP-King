@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7197010554106827544}
   - component: {fileID: 7197010554106827545}
   - component: {fileID: 7197010554106827546}
-  - component: {fileID: 1858078315295670089}
   - component: {fileID: 9171616766919312200}
   - component: {fileID: 6288321155536183938}
+  - component: {fileID: 1858078315295670089}
   - component: {fileID: 1093811253}
   m_Layer: 0
   m_Name: Player
@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd36c51a71848d549b2b538ee175f659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8.5
+  maximumPlayerSpeed: 0
+  minimumPlayerSpeed: 0
+  deadSpeedZoneDistance: 0
+  variableSpeedZoneDistance: 0
   map: {fileID: 0}
 --- !u!212 &7197010554106827546
 SpriteRenderer:
@@ -65,6 +68,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -100,21 +104,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1858078315295670089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7197010554106827548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e38a3458a4fd45428cf0608645040c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equippedMask: {fileID: 167972391841484388, guid: 72ca8a658974b484ab349101e090f910,
-    type: 3}
-  maxMaskDurability: 0
 --- !u!50 &9171616766919312200
 Rigidbody2D:
   serializedVersion: 4
@@ -211,6 +200,21 @@ PolygonCollider2D:
       - {x: 0.25, y: -1.6999999}
       - {x: 0.44, y: -1.67}
       - {x: 0.71, y: -1.54}
+--- !u!114 &1858078315295670089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7197010554106827548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e38a3458a4fd45428cf0608645040c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equippedMask: {fileID: 167972391841484388, guid: 72ca8a658974b484ab349101e090f910,
+    type: 3}
+  maxMaskDurability: 10
 --- !u!114 &1093811253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   infectionAmt: 0
-  health: 8
-  equippedMask: {fileID: 167972391841484388, guid: 72ca8a658974b484ab349101e090f910,
-    type: 3}
+  maxHealth: 10
+  isMaskEquipped: 0
+  equippedMaskPrefab: {fileID: 0}
+  lastLoggedInfectionChange: 0

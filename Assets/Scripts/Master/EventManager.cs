@@ -26,7 +26,7 @@ public class EventManager : MonoBehaviour
 void Start()
     {
         gameManager = gameManagerObj.GetComponent<GameManager>();
-        soundManager = soundManager.GetComponent<SoundManager>();
+        soundManager = gameManagerObj.GetComponent<SoundManager>();
         uiManager = canvas.GetComponent<UIManager>();
         difficultyManager = gameManagerObj.GetComponent<DifficultyManager>();
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
@@ -67,6 +67,16 @@ void Start()
         player.InfectionUpdated += uiManager.OnInfectionUpdated;
         player.InfectionUpdated += infectionIcon.OnInfectionUpdated;
     }
+
+    private void SubscriberSetup_ItemCollidedWithPlayer()
+    {
+        itemManager.ItemCollidedWithPlayer += soundManager.OnItemCollidedWithPlayer;
+    }
+
+    private void SubscriberSetup_VirusColliderWithMask()
+    {
+        maskManager.VirusCollidedWithMask += soundManager.OnVirusCollidedWithMask;
+    }
     #endregion
 
     #region EventHandlers
@@ -77,11 +87,13 @@ void Start()
         infectionIcon = infectionIconObj.GetComponent<InfectionIcon>();
         SubscribeSetup_MaskEquipped();
         SubscriberSetup_InfectionUpdated();
+        SubscriberSetup_ItemCollidedWithPlayer();
     }
 
     public void OnMaskEquipped (GameObject source, EventArgs e)
     {
         maskManager = GameObject.Find("Equipped Mask(Clone)").GetComponent<MaskManager>();
+        SubscriberSetup_VirusColliderWithMask();
         SubscriberSetup_MaskDurabilityUpdated();
     }
     #endregion

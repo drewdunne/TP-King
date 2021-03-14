@@ -20,6 +20,7 @@ public class CameraBehavior : MonoBehaviour
         if (gameManager.gameActive == true)
         {
             gameObject.transform.position = player.transform.position + new Vector3(0, 0, -40);
+            gameObject.GetComponent<Camera>().orthographicSize = 8;
         }
     }
     public void AttachCameraToPlayer(GameObject newPlayer)

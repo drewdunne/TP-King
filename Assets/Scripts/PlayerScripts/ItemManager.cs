@@ -18,7 +18,10 @@ public class ItemManager : MonoBehaviour
     public float maxMaskDurability;
 
     public delegate void MaskEquippedEventHandler(GameObject source, EventArgs args);
+    public delegate void ItemCollidedWithPlayerEventHandler(GameObject item);
+
     public event MaskEquippedEventHandler MaskEquipped;
+    public event ItemCollidedWithPlayerEventHandler ItemCollidedWithPlayer;
 
 
     // Start is called before the first frame update
@@ -50,6 +53,8 @@ public class ItemManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        OnItemCollidedWithPlayer(other.gameObject);
+
         switch (other.gameObject.name)
         {
             case ("Virus(Clone)"):
@@ -115,6 +120,12 @@ public class ItemManager : MonoBehaviour
     {
         if (MaskEquipped != null)
             MaskEquipped(maskObj, e);
+    }
+
+    public virtual void OnItemCollidedWithPlayer(GameObject item)
+    {
+        if (ItemCollidedWithPlayer != null)
+            ItemCollidedWithPlayer(item);
     }
 
 
