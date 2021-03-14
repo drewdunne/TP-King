@@ -31,7 +31,7 @@ public class InfectionIcon : MonoBehaviour
     }
     
 
-    public void OnInfectionUpdated(GameObject playerObj, System.EventArgs e)
+    public void OnInfectionUpdated(GameObject playerObj, int infectionDelta)
     {
         Vector3 distance = new Vector3(0, stepSize * playerObj.GetComponent<PlayerManager>().lastLoggedInfectionChange, 0);
         gameObject.GetComponent<Transform>().Translate(distance);

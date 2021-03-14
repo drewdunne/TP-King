@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
         maskDurabilityBarObj.SetActive(false);
     }
 
-    public void OnInfectionUpdated(GameObject playerObj, EventArgs eventArgs)
+    public void OnInfectionUpdated(GameObject playerObj, int infectionDelta)
     {
         infectionBar.SetValue(playerObj.GetComponent<PlayerManager>().infectionAmt);
         

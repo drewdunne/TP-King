@@ -19,11 +19,14 @@ public class EventManager : MonoBehaviour
     private DifficultyManager difficultyManager;
     private SpawnManager spawnManager;
     private InfectionIcon infectionIcon;
+    private SoundManager soundManager;
+
 #endregion
     // Start is called before the first frame update
 void Start()
     {
         gameManager = gameManagerObj.GetComponent<GameManager>();
+        soundManager = soundManager.GetComponent<SoundManager>();
         uiManager = canvas.GetComponent<UIManager>();
         difficultyManager = gameManagerObj.GetComponent<DifficultyManager>();
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();

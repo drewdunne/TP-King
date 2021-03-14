@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     
 #endregion
     #region eventHandlers
-    public delegate void InfectionChangedEventHandler (GameObject player, EventArgs args);
+    public delegate void InfectionChangedEventHandler (GameObject player, int deltaInfection);
 
     public event InfectionChangedEventHandler InfectionUpdated;
 #endregion
@@ -42,7 +42,9 @@ public class PlayerManager : MonoBehaviour
         }
         infectionAmt += deltaInfection;
         lastLoggedInfectionChange = deltaInfection;
-        OnInfectionChanged(gameObject, EventArgs.Empty);
+
+
+        OnInfectionChanged(gameObject, deltaInfection);
         UpdatePlayerSprite();
     }
     public void EquipPlayerMask()
@@ -96,9 +98,9 @@ public class PlayerManager : MonoBehaviour
     {
         isMaskEquipped = false;
     }
-    protected virtual void OnInfectionChanged (GameObject playerObj, EventArgs args)
+    protected virtual void OnInfectionChanged (GameObject playerObj, int deltaInfection)
     {
         if (InfectionUpdated != null)
-            InfectionUpdated(playerObj, args);
+            InfectionUpdated(playerObj, deltaInfection);
     }
 }
