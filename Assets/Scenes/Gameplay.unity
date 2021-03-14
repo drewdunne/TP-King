@@ -823,6 +823,7 @@ GameObject:
   - component: {fileID: 359876037}
   - component: {fileID: 359876038}
   - component: {fileID: 359876039}
+  - component: {fileID: 359876040}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -881,6 +882,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infectionIconObj: {fileID: 1071631826}
+--- !u!114 &359876040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359876036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f854fa8bde15547fe9c1f4e0949276a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &415727663
 GameObject:
   m_ObjectHideFlags: 0
