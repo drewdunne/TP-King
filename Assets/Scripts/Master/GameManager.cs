@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         difficultyManager = gameObject.GetComponent<DifficultyManager>();
         uiManager = canvasObj.GetComponent<UIManager>();
         scoreTracker = GameObject.Find("Score Tracker").GetComponent<ScoreTracker>();
+        uiManager.LoadSplashScreens();
     }
 
     // Update is called once per frame
@@ -50,7 +51,6 @@ public class GameManager : MonoBehaviour
             IsGameOverCheck();
         }
 
-        //
     }
 
 #region DifficultyButtons
@@ -58,17 +58,23 @@ public class GameManager : MonoBehaviour
     public void ButtonDifficultyEasy()
     {
         difficulty = Difficulty.Easy;
-        InitializeGameplay();
+        difficultyButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        difficultyButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        difficultyButtons[2].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
     public void ButtonDifficultyNormal()
     {
         difficulty = Difficulty.Medium;
-        InitializeGameplay();
+        difficultyButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        difficultyButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        difficultyButtons[2].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
     public void ButtonDifficultyHard()
     {
         difficulty = Difficulty.Hard;
-        InitializeGameplay();
+        difficultyButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        difficultyButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        difficultyButtons[2].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
     }
 
 #endregion
@@ -76,24 +82,18 @@ public class GameManager : MonoBehaviour
 
 #region Start/End Functions
 
-    private void InitializeGameplay()
+    public void InitializeGameplay()
     {
         gameActive = true;
         difficultyManager.SetDifficultyVariables(difficulty); 
-        DeactivateDifficultyUI();
+        uiManager.UnloadMainMenuScreen();
         playerObj = Instantiate(playerPrefab);
         OnPlayerCreated(playerObj, EventArgs.Empty);
         playerManager = playerObj.GetComponent<PlayerManager>();
         playerManager.LoadPlayerSprites(difficulty);
         cameraView.AttachCameraToPlayer(playerObj);
     }
-    private void DeactivateDifficultyUI()
-    {
-        foreach (GameObject button in difficultyButtons)
-        {
-            button.SetActive(false);
-        }
-    }
+    
     private void EndGameplay()
     {
         gameActive = false;
@@ -103,10 +103,6 @@ public class GameManager : MonoBehaviour
         spawnManager.EndSpawners();
     }
 
-        
-
-#endregion
-
     private void RestartGame()
     {
         uiManager.DeactivateGameplayUI();
@@ -115,6 +111,10 @@ public class GameManager : MonoBehaviour
         uiManager.highScoreObj.SetActive(true);
         UpdateHighScore();
     }
+
+        
+#endregion
+
     private void IsGameOverCheck()
     {
         if (playerManager.infectionAmt >= playerManager.maxHealth)

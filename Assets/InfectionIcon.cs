@@ -15,6 +15,7 @@ public class InfectionIcon : MonoBehaviour
     void Start()
     {
         startingPosition = -180.3f;
+        stepSize = (endPosition - startingPosition) / quantityOfSteps;
     }
 
     // Update is called once per frame
@@ -27,13 +28,17 @@ public class InfectionIcon : MonoBehaviour
     {
         endPosition = 182;
         quantityOfSteps = playerMaxHealth;
-        stepSize = 525 / quantityOfSteps;
     }
     
 
     public void OnInfectionUpdated(GameObject playerObj, int infectionDelta)
     {
-        Vector3 distance = new Vector3(0, stepSize * playerObj.GetComponent<PlayerManager>().lastLoggedInfectionChange, 0);
-        gameObject.GetComponent<Transform>().Translate(distance);
+        float amountToMove = stepSize * infectionDelta;
+        Vector3 currentPosition = gameObject.GetComponent<RectTransform>().anchoredPosition;
+        Vector3 newPosition = new Vector3(currentPosition.x + amountToMove, currentPosition.y, currentPosition.z);
+
+        gameObject.GetComponent<RectTransform>().anchoredPosition = newPosition;
+
+        //gameObject.GetComponent<Transform>().Translate(distance); (depricated, was not translating by correct value for some reason)
     }
 }

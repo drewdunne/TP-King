@@ -7,8 +7,8 @@ public class PlayerManager : MonoBehaviour
 
     #region varDeclarations
     public int score;
-    public int infectionAmt;
-    public int maxHealth;
+    public float infectionAmt;
+    public float maxHealth;
     public bool isMaskEquipped;
     public GameObject equippedMaskPrefab;
     private GameObject maskObj;
@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (infectionAmt + deltaInfection < 0)
         {
-            deltaInfection = -infectionAmt;
+            deltaInfection = (int)-infectionAmt;
         }
         infectionAmt += deltaInfection;
         lastLoggedInfectionChange = deltaInfection;
@@ -76,7 +76,9 @@ public class PlayerManager : MonoBehaviour
     }
     private void UpdatePlayerSprite()
     {
-        if (infectionAmt / maxHealth < .5)
+        float percentHealth = infectionAmt / maxHealth;
+
+        if (percentHealth < .5)
         {
                 spriteR.sprite = sprites[(int)ModelType.healthyModel];
         }
